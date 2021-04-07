@@ -30,6 +30,7 @@ pub fn spellcheck_rayon<'a>(dictionary_string: &'a str, word: &str, distance: us
         .collect::<Vec<&str>>()
         .par_iter()
         .map(|string_in| {
+            use std::cmp::min;
             let (shorter, longer) = {
                 if string_in.len() > word.len() {
                     (*string_in, word)
@@ -66,16 +67,23 @@ pub fn spellcheck_rayon<'a>(dictionary_string: &'a str, word: &str, distance: us
                 list = temp
             }
 
-            (*string_in, list.pop().unwrap() - 1)
+            (*string_in, min(list.pop().unwrap() - 1, distance + 1))
         })
         .filter(|x| x.1 < distance)
         .collect();
     
     // sort by distance and then return the words
 
-    // TODO: this should really be a counting sort
-    vec.par_sort_by(|a, b| a.1.cmp(&b.1));
-    vec.par_iter().map(|x| x.0).collect()
+    // counting sort because its O(n)
+    let mut out = Vec::new();
+    for x in 0..(distance + 1) {
+        for y in &vec {
+            if y.1 == x {
+                out.push(y.0)
+            }
+        }
+    }
+    out
 }
 
 
@@ -194,8 +202,16 @@ pub fn spellcheck<'a>(dictionary_string: &'a str, word: &str, distance: usize) -
             out.push((string_in, out_distance))
         }
     }
-    out.sort_by(|a, b| a.1.cmp(&b.1));
-    out.iter().map(|x| x.0).collect()
+
+    let mut return_out = Vec::new();
+    for x in 0..(distance + 1) {
+        for y in &out {
+            if y.1 == x {
+                return_out.push(y.0)
+            }
+        }
+    }
+    return_out
 } 
 
 #[cfg(test)]
