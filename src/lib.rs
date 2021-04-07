@@ -153,7 +153,7 @@ pub fn spellcheck_rayon<'a>(dictionary_string: &'a str, word: &str, distance: us
 ///
 pub fn spellcheck<'a>(dictionary_string: &'a str, word: &str, distance: usize) -> Vec<&'a str> {
     let mut out = Vec::new();
-    'loop1: for string_in in dictionary_string.split("\n") {
+    'loop1: for string_in in dictionary_string.split('\n') {
         let (shorter, longer) = {
             if string_in.len() > word.len() {
                 (string_in, word)

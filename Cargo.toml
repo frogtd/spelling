@@ -1,6 +1,6 @@
 [package]
 name = "spelling"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["frogtd <31412003+frogtd@users.noreply.github.com>"]
 edition = "2018"
 license = "Unlicense"
