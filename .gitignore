@@ -1,7 +1,4 @@
 /target
 Cargo.lock
 words.txt
-perf.data
-perf.data.old
-out.svg
 flamegraph.svg
