@@ -36,8 +36,6 @@ pub fn spellcheck<'a>(dictionary_string: &'a str, word: &str, distance: usize) -
         .map(|string_in| {
 
             use std::ops::Range;
-            use std::cmp::min;
-
             let (shorter, longer) = {
                 if string_in.len() > word.len() {
                     (*string_in, word)
@@ -47,11 +45,10 @@ pub fn spellcheck<'a>(dictionary_string: &'a str, word: &str, distance: usize) -
             };
 
             let mut list: Vec<usize> = vec![1];
-            list.append(&mut Range {
-                start: 1,
-                end: shorter.len(),
+            for index in 1..shorter.len() {
+                list.push(index)
             }
-            .collect());
+            .collect();
 
             for x in 2..(longer.len() + 1) {
                 let mut left = x;
@@ -62,7 +59,7 @@ pub fn spellcheck<'a>(dictionary_string: &'a str, word: &str, distance: usize) -
                 for (index, y) in iter {
                     left = match longer.as_bytes()[x-1] == shorter.as_bytes()[index] {
                         true => list[index-1],
-                        false => min(min(list[index-1], *y), left) + 1
+                        false => [list[index-1], *y, left].iter().min().unwrap() + 1
                     };
                     temp.push(left);
                 }
