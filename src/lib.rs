@@ -34,8 +34,6 @@ pub fn spellcheck<'a>(dictionary_string: &'a str, word: &str, distance: usize) -
         .collect::<Vec<&str>>()
         .par_iter()
         .map(|string_in| {
-
-            use std::ops::Range;
             let (shorter, longer) = {
                 if string_in.len() > word.len() {
                     (*string_in, word)
@@ -44,11 +42,11 @@ pub fn spellcheck<'a>(dictionary_string: &'a str, word: &str, distance: usize) -
                 }
             };
 
-            let mut list: Vec<usize> = vec![1];
+            let mut list: Vec<usize> = Vec::with_capacity(string_in.len()+1);
+            list.push(1);
             for index in 1..shorter.len() {
                 list.push(index)
-            }
-            .collect();
+            };
 
             for x in 2..(longer.len() + 1) {
                 let mut left = x;
