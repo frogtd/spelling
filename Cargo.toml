@@ -11,10 +11,3 @@ description = "A spellchecker using the Levenshtein distance as the heuristic fo
 
 [dependencies]
 rayon = "1.5"
-
-[profile.release]
-debug = true
-
-[[bin]]
-name = "test"
-path = "src/test_bin.rs"
