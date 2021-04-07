@@ -2,3 +2,4 @@
 Cargo.lock
 words.txt
 flamegraph.svg
+/.vscode
