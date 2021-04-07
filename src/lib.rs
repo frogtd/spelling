@@ -25,7 +25,7 @@
 #[cfg(feature = "use_rayon")]
 pub fn spellcheck_rayon<'a>(dictionary_string: &'a str, word: &str, distance: usize) -> Vec<&'a str> {
     use rayon::prelude::*;
-    let mut vec: Vec<_> = dictionary_string
+    let vec: Vec<_> = dictionary_string
         .split('\n')
         .collect::<Vec<&str>>()
         .par_iter()

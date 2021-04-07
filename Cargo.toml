@@ -1,6 +1,6 @@
 [package]
 name = "spelling"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["frogtd <31412003+frogtd@users.noreply.github.com>"]
 edition = "2018"
 license = "Unlicense"
@@ -10,7 +10,8 @@ description = "A spellchecker using the Levenshtein distance as the heuristic fo
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rayon = "1.5"
+rayon = {version = "1.5", optional = true }
 
 [features] 
-use_rayon = []
+default = ["use_rayon"]
+use_rayon = ["rayon"]
