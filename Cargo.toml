@@ -11,3 +11,6 @@ description = "A spellchecker using the Levenshtein distance as the heuristic fo
 
 [dependencies]
 rayon = "1.5"
+
+[features] 
+use_rayon = []
