@@ -41,12 +41,11 @@ pub fn spellcheck_rayon<'a>(dictionary_string: &'a str, word: &str, distance: us
 
             // create list like [1, 1, 2, 3, 4, 5];
             let mut list: Vec<usize> = Vec::with_capacity(shorter.len() + 1);
-            list.push(1);
-            for index in 1..(shorter.len() + 1) {
+            for index in 0..(shorter.len() + 1) {
                 list.push(index)
             }
 
-            for x in 2..(longer.len() + 1) {
+            for x in 1..(longer.len() + 1) {
                 let mut left = x;
                 let mut temp: Vec<usize> = Vec::with_capacity(shorter.len() + 1);
                 temp.push(left);
@@ -75,7 +74,7 @@ pub fn spellcheck_rayon<'a>(dictionary_string: &'a str, word: &str, distance: us
     // sort by distance and then return the words
 
     // counting sort because its O(n)
-    let mut out = Vec::new();
+    let mut out = Vec::with_capacity(vec.len());
     for x in 0..(distance + 1) {
         for y in &vec {
             if y.1 == x {
@@ -172,12 +171,11 @@ pub fn spellcheck<'a>(dictionary_string: &'a str, word: &str, distance: usize) -
 
         // create list like [1, 1, 2, 3, 4, 5];
         let mut list: Vec<usize> = Vec::with_capacity(shorter.len() + 1);
-        list.push(1);
-        for index in 1..(shorter.len() + 1) {
+        for index in 0..(shorter.len() + 1) {
             list.push(index)
         }
 
-        for x in 2..(longer.len() + 1) {
+        for x in 1..(longer.len() + 1) {
             let mut left = x;
             let mut temp: Vec<usize> = Vec::with_capacity(shorter.len() + 1);
             temp.push(left);
