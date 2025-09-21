@@ -1,8 +1,8 @@
 [package]
 name = "spelling"
-version = "0.2.4"
+version = "1.0.0"
 authors = ["frogtd <31412003+frogtd@users.noreply.github.com>"]
-edition = "2018"
+edition = "2024"
 license = "Unlicense"
 repository = "https://github.com/frogtd/spelling/"
 readme = "README.md"
